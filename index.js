@@ -6,7 +6,7 @@ const beautify_css = require('js-beautify').css;
 import('website-scraper').then(({ default: scrape }) => {
     let options = {
         urls: ['https://nodejs.org/'],
-        directory: './node-homepage',
+        directory: './node',
 
         // recursive: true,
         // maxDepth: 1
