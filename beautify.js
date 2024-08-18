@@ -5,7 +5,7 @@ const beautify_html = require('js-beautify').html;
 const fs = require('fs');
 const path = require('path');
 
-function beautifyFiles(dirPath = __dirname) {
+module.exports = function beautifyFiles(dirPath = __dirname) {
     const files = fs.readdirSync(dirPath);
 
     files.forEach((file) => {
@@ -39,5 +39,3 @@ function beautifyFiles(dirPath = __dirname) {
         }
     });
 }
-
-module.exports = beautifyFiles;

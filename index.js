@@ -1,4 +1,5 @@
 const beautifyFiles = require('./beautify.js');
+const archiveAndDelete = require('./arhivator.js');
 
 const nameDirectory = "node";
 
@@ -18,17 +19,18 @@ import('website-scraper').then(({ default: scrape }) => {
         // },
     };
 
+
+    // копируем файлы через scrapper
     scrape(options).then(() => {
         console.log("Веб-сайт успешно скачан");
     }).then(() => {
+        // все файлы чаще 
         beautifyFiles(__dirname + `/${nameDirectory}`);
         console.log("Веб-сайт успешно отредактирован")
+    }).then(() => {
+        archiveAndDelete(__dirname + `/${nameDirectory}`);
+        console.log("Веб-сайт успешно архивирован");
     }).catch((err) => {
         console.log("Произошла ошибка", err);
     });
 });
-
-// .then(() => {
-//     beautifyFiles(__dirname + `/${nameDirectory}`);
-//     console.log("Веб-сайт успешно архивирован")
-// })
