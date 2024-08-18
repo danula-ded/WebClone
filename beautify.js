@@ -40,5 +40,4 @@ function beautifyFiles(dirPath = __dirname) {
     });
 }
 
-// Пример использования:
-beautifyFiles(__dirname + "/node");
+module.exports = beautifyFiles;
