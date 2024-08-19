@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #2c3e50;
+    padding: 10px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #bdc3c7;
+}
+
+main {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.clone-section h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #2980b9;
+}
+
+.url-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.settings {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.settings h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #2980b9;
+}
+
+.settings label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.clone-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.clone-button:hover {
+    background-color: #3498db;
+}
