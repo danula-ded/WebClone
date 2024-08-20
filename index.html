@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB_CLONE</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Repository</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="clone-section">
+            <h1>Clone Any Website</h1>
+            <input type="text" placeholder="Enter URL to clone..." class="url-input" id="url-input">
+            <div class="settings">
+                <h2>Settings</h2>
+                <label>
+                    <input type="checkbox"> Include Images
+                </label>
+                <label>
+                    <input type="checkbox"> Include Styles
+                </label>
+                <label>
+                    <input type="checkbox"> Include Scripts
+                </label>
+            </div>
+            <button class="clone-button" onclick="cloneWeb()">Clone Website</button>
+        </section>
+    </main>
+    <script href="./index.js"></script>
+</body>
+
+</html>
