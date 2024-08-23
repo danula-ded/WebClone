@@ -1,13 +1,13 @@
 const beautifyFiles = require('./js/beautify.js');
 const archiveAndDelete = require('./js/arhivator.js');
 
-export function cloneWeb() {
+function cloneWeb() {
     const nameDirectory = "node";
     const url = document.getElementById("url-input").value
     console.log("init")
     import('website-scraper').then(({ default: scrape }) => {
         let options = {
-            urls: [`./${url}`],
+            urls: [`${url}`],
             directory: `./${nameDirectory}`,
 
             // recursive: true,
@@ -26,15 +26,16 @@ export function cloneWeb() {
         scrape(options).then(() => {
             console.log("Веб-сайт успешно скачан");
         }).then(() => {
-            // все файлы чаще 
+            // все файлы делаем не сжатыми, а "красивыми"
             beautifyFiles(__dirname + `/${nameDirectory}`);
-            console.log("Веб-сайт успешно отредактирован")
         }).then(() => {
-            // архивирует файлы и удаляет папку из fs
-            archiveAndDelete(__dirname + `/${nameDirectory}`);
-            console.log("Веб-сайт успешно архивирован");
+            // архивирует файлы и удаляет папку из fs(опционально)
+            archiveAndDelete(__dirname + `/${nameDirectory}`, false, true);
         }).catch((err) => {
             console.log("Произошла ошибка", err);
         });
     });
 }
+
+
+cloneWeb()

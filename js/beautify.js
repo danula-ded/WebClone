@@ -38,4 +38,5 @@ module.exports = function beautifyFiles(dirPath = __dirname) {
             beautifyFiles(filePath);
         }
     });
+    console.log("Веб-сайт успешно отредактирован")
 }
