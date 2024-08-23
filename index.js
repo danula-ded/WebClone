@@ -1,10 +1,18 @@
 const beautifyFiles = require('./js/beautify.js');
 const archiveAndDelete = require('./js/arhivator.js');
 
+const path = require('path');
+
 function cloneWeb() {
+    //базовая инициализация
     const nameDirectory = "node";
-    const url = document.getElementById("url-input").value
+    const pathDir = path.join(__dirname, nameDirectory);
+    const url = "https://ritikasoniportfolio.netlify.app/";
+    const isArchive = false;
+    const isDeleteDir = false;
+
     console.log("init")
+
     import('website-scraper').then(({ default: scrape }) => {
         let options = {
             urls: [`${url}`],
@@ -27,10 +35,11 @@ function cloneWeb() {
             console.log("Веб-сайт успешно скачан");
         }).then(() => {
             // все файлы делаем не сжатыми, а "красивыми"
-            beautifyFiles(__dirname + `/${nameDirectory}`);
+            beautifyFiles(pathDir);
+            console.log("Веб-сайт успешно отредактирован")
         }).then(() => {
             // архивирует файлы и удаляет папку из fs(опционально)
-            archiveAndDelete(__dirname + `/${nameDirectory}`, false, true);
+            archiveAndDelete(pathDir, isArchive, isDeleteDir);
         }).catch((err) => {
             console.log("Произошла ошибка", err);
         });
