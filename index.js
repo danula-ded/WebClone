@@ -1,50 +1,38 @@
+const express = require('express');
 const beautifyFiles = require('./js/beautify.js');
 const archiveAndDelete = require('./js/arhivator.js');
-
 const path = require('path');
 
-function cloneWeb() {
-    //базовая инициализация
-    const nameDirectory = "node";
-    const pathDir = path.join(__dirname, nameDirectory);
-    const url = "https://ritikasoniportfolio.netlify.app/";
-    const isArchive = false;
-    const isDeleteDir = false;
+const app = express();
+const port = 3000;
 
-    console.log("init")
+app.use(express.json()); // добавляем эту строку
 
-    import('website-scraper').then(({ default: scrape }) => {
-        let options = {
+app.post('/clone-web', async (req, res) => {
+    try {
+        const url = req.body.url;
+        const nameDirectory = "node";
+        const pathDir = path.join(__dirname, nameDirectory);
+        const isArchive = false;
+        const isDeleteDir = false;
+
+        const options = {
             urls: [`${url}`],
             directory: `./${nameDirectory}`,
-
-            // recursive: true,
-            // maxDepth: 1
-            // urlFilter: function(url){
-            //     if(url.indexOf(websiteUrl) === 0){
-            //         console.log(`URL ${ url } matches ${ websiteUrl } `);
-            //         return true;
-            //     }
-            //     return false;
-            // },
         };
 
+        const { default: scrape } = await import('website-scraper');
+        await scrape(options); // добавляем await перед вызовом scrape
+        console.log("Веб-сайт успешно скачан");
+        beautifyFiles(pathDir);
+        console.log("Веб-сайт успешно отредактирован");
+        archiveAndDelete(pathDir, isArchive, isDeleteDir);
+        res.json({ message: "Success" });
+    } catch (err) {
+        console.log("Произошла ошибка", err);
+    }
+});
 
-        // копируем файлы через scrapper
-        scrape(options).then(() => {
-            console.log("Веб-сайт успешно скачан");
-        }).then(() => {
-            // все файлы делаем не сжатыми, а "красивыми"
-            beautifyFiles(pathDir);
-            console.log("Веб-сайт успешно отредактирован")
-        }).then(() => {
-            // архивирует файлы и удаляет папку из fs(опционально)
-            archiveAndDelete(pathDir, isArchive, isDeleteDir);
-        }).catch((err) => {
-            console.log("Произошла ошибка", err);
-        });
-    });
-}
-
-
-cloneWeb()
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+});

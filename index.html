@@ -36,10 +36,28 @@
                     <input type="checkbox"> Include Scripts
                 </label>
             </div>
-            <button class="clone-button" onclick="cloneWeb()">Clone Website</button>
+            <button class="main-button" id="clone-button">Clone Website</button>
         </section>
     </main>
-    <script href="./index.js"></script>
+    <script>
+        const button = document.getElementById('clone-button');
+        button.addEventListener('click', () => {
+            // Здесь вы можете отправить запрос на backend
+            fetch('http://localhost:3000/clone-web', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    // Здесь вы можете передать данные на backend
+                    url: `${document.getElementById('url-input').value}`
+                })
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+        });
+    </script>
 </body>
 
 </html>
