@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
 
-module.exports = function archiveAndDelete(dir) {
+function archiving(dir) {
     const archiveName = `${dir}.zip`;
     const output = fs.createWriteStream(archiveName);
     const archive = archiver('zip', {
@@ -17,9 +17,25 @@ module.exports = function archiveAndDelete(dir) {
     });
 
     archive.finalize();
+    console.log("Веб-сайт успешно архивирован");
+}
 
-    output.on('close', () => {
-        fs.rmdirSync(dir, { recursive: true });
-        console.log(`Директория ${dir} успешно архивирована и удалена`);
+function deleteDir(dir) {
+    fs.rm(dir, { recursive: true, force: true }, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log(`Директория ${dir} удалена успешно`);
+        }
     });
+}
+
+module.exports = function archiveAndDelete(dir, isArchive = true, isDeleteDir = true) {
+    if (isArchive) {
+        archiving(dir)
+    }
+    if (isDeleteDir) {
+        deleteDir(dir)
+    }
+
 };

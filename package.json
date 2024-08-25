@@ -18,6 +18,7 @@
   "homepage": "https://github.com/danula-ded/WebClone#readme",
   "dependencies": {
     "archiver": "^7.0.1",
+    "express": "^4.19.2",
     "js-beautify": "^1.15.1",
     "website-scraper": "^5.3.1",
     "website-scraper-puppeteer": "^1.0.0"
